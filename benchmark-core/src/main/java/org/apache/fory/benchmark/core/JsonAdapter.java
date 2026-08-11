@@ -14,4 +14,12 @@ public interface JsonAdapter {
   Customer fromJson(String json);
 
   Customer fromJsonBytes(byte[] json);
+
+  default String serializationImplementation() {
+    return "adapter-managed";
+  }
+
+  default String deserializationImplementation() {
+    return "adapter-managed";
+  }
 }

@@ -4,12 +4,14 @@ package org.apache.fory.benchmark.jackson;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import java.io.IOException;
 import org.apache.fory.benchmark.core.JsonAdapter;
+import org.apache.fory.benchmark.model.Address;
+import org.apache.fory.benchmark.model.CreditCard;
 import org.apache.fory.benchmark.model.Customer;
+import org.apache.fory.benchmark.model.Person;
 
 public final class JacksonJsonAdapter implements JsonAdapter {
   private final ObjectMapper mapper;
@@ -19,7 +21,10 @@ public final class JacksonJsonAdapter implements JsonAdapter {
         JsonMapper.builder()
             .visibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
             .visibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-            .enable(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY)
+            .addMixIn(Customer.class, BenchmarkJacksonMixins.CustomerMixin.class)
+            .addMixIn(Person.class, BenchmarkJacksonMixins.PersonMixin.class)
+            .addMixIn(Address.class, BenchmarkJacksonMixins.AddressMixin.class)
+            .addMixIn(CreditCard.class, BenchmarkJacksonMixins.CreditCardMixin.class)
             .build();
   }
 
@@ -62,5 +67,15 @@ public final class JacksonJsonAdapter implements JsonAdapter {
     } catch (IOException error) {
       throw new IllegalStateException("Jackson UTF-8 deserialization failed", error);
     }
+  }
+
+  @Override
+  public String serializationImplementation() {
+    return "jackson-databind";
+  }
+
+  @Override
+  public String deserializationImplementation() {
+    return "jackson-databind";
   }
 }

@@ -19,9 +19,11 @@ run_maven() {
 }
 
 cd "${benchmark_root}"
-run_maven test
+run_maven clean test
 run_maven -pl fory-app -am -Pnative -DskipTests package
 run_maven -pl jackson-app -am -Pnative -DskipTests package
+run_maven -pl jackson-generated-app -am -Pgenerated-native -DskipTests package
 
 ./fory-app/target/fory-json-benchmark --verify
 ./jackson-app/target/jackson-benchmark --verify
+./jackson-generated-app/target/jackson-generated-benchmark-runner --verify

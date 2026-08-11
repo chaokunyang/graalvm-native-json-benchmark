@@ -4,7 +4,7 @@ package org.apache.fory.benchmark.core;
 import java.util.Locale;
 import java.util.function.LongUnaryOperator;
 
-/** Time-based single-thread benchmark runner shared by both native executables. */
+/** Time-based single-thread benchmark runner shared by all native executables. */
 public final class BenchmarkRunner {
   private static volatile long blackhole;
 
@@ -26,12 +26,16 @@ public final class BenchmarkRunner {
           Locale.ROOT,
           "{\"status\":\"ok\",\"library\":\"%s\",\"runtime\":\"%s\","
               + "\"verified_fixtures\":%d,\"average_payload_bytes\":%.3f,"
-              + "\"payload_hash\":\"%s\"}%n",
+              + "\"payload_hash\":\"%s\","
+              + "\"serialization_implementation\":\"%s\","
+              + "\"deserialization_implementation\":\"%s\"}%n",
           adapter.name(),
           runtime(),
           fixtures.size(),
           workload.averagePayloadBytes(),
-          workload.payloadHash());
+          workload.payloadHash(),
+          adapter.serializationImplementation(),
+          adapter.deserializationImplementation());
       return;
     }
 

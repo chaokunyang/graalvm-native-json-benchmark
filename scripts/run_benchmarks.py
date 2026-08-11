@@ -31,6 +31,18 @@ DEFAULT_OPERATIONS = [
 ]
 TIME_BINARY = Path("/usr/bin/time")
 
+# This order still covers all six permutations. Its first four entries also
+# keep first/second/third process positions within one sample per library in
+# the default 7-fork x 4-operation matrix (28 process groups).
+EXECUTION_ORDERS = [
+    ("fory-json", "jackson", "jackson-generated"),
+    ("fory-json", "jackson-generated", "jackson"),
+    ("jackson", "fory-json", "jackson-generated"),
+    ("jackson-generated", "jackson", "fory-json"),
+    ("jackson", "jackson-generated", "fory-json"),
+    ("jackson-generated", "fory-json", "jackson"),
+]
+
 
 def sanitize_text(value: str) -> str:
     sanitized = value.replace(str(ROOT), "$REPO")
@@ -70,6 +82,13 @@ def parse_args() -> argparse.Namespace:
         "--jackson-bin",
         type=Path,
         default=Path("jackson-app/target/jackson-benchmark"),
+    )
+    parser.add_argument(
+        "--jackson-generated-bin",
+        type=Path,
+        default=Path(
+            "jackson-generated-app/target/jackson-generated-benchmark-runner"
+        ),
     )
     parser.add_argument("--forks", type=positive_int, default=7)
     parser.add_argument("--warmup-seconds", type=positive_int, default=3)
@@ -299,6 +318,13 @@ def run_process(
         completed.stdout + completed.stderr
     ):
         raise ProcessError("Fory JSON did not use its generated native codecs", record)
+    if expected_library == "jackson-generated" and expected_operation is None:
+        serializer = str(result.get("serialization_implementation", ""))
+        deserializer = str(result.get("deserialization_implementation", ""))
+        if not serializer.endswith("$quarkusjacksonserializer"):
+            raise ProcessError("Quarkus did not select its generated serializer", record)
+        if not deserializer.endswith("$quarkusjacksondeserializer"):
+            raise ProcessError("Quarkus did not select its generated deserializer", record)
     return record
 
 
@@ -340,6 +366,7 @@ def environment_metadata(
         "dependencies": {
             "fory_json": versions.get("fory.version"),
             "jackson_databind": versions.get("jackson.version"),
+            "quarkus": versions.get("quarkus.platform.version"),
             "native_maven_plugin": versions.get("native.maven.plugin.version"),
         },
         "native_build": {
@@ -354,8 +381,10 @@ def environment_metadata(
             "batch_size": args.batch_size,
             "cooldown_seconds": args.cooldown_seconds,
             "operations": args.operations,
+            "libraries": list(binaries),
             "fixture_count": 256,
             "time_tool_mode": mode,
+            "execution_order": "balanced deterministic permutation cycle",
         },
         "binaries": {
             library: {
@@ -367,6 +396,10 @@ def environment_metadata(
         },
         "source_context": {
             "quarkus_article": "https://quarkus.io/blog/quarkus-metaprogramming/",
+            "quarkus_rest_guide": (
+                "https://quarkus.io/guides/rest#reflection-free-jackson-"
+                "serialization-and-deserialization"
+            ),
             "scope": "JSON codec layer; not HTTP endpoint throughput",
         },
     }
@@ -381,6 +414,7 @@ def main() -> int:
     binaries = {
         "fory-json": resolve_from_root(args.fory_bin),
         "jackson": resolve_from_root(args.jackson_bin),
+        "jackson-generated": resolve_from_root(args.jackson_generated_bin),
     }
     for library, binary in binaries.items():
         if not binary.is_file() or not os.access(binary, os.X_OK):
@@ -426,10 +460,11 @@ def main() -> int:
             if len(set(verification_hashes.values())) != 1:
                 raise RuntimeError(f"native payload hashes differ: {verification_hashes}")
 
-            libraries = list(binaries)
             for fork in range(1, args.forks + 1):
                 for operation_index, operation in enumerate(args.operations):
-                    order = libraries if (fork + operation_index) % 2 else list(reversed(libraries))
+                    order = EXECUTION_ORDERS[
+                        (fork - 1 + operation_index) % len(EXECUTION_ORDERS)
+                    ]
                     for order_index, library in enumerate(order, start=1):
                         completed_samples += 1
                         print(
@@ -457,7 +492,7 @@ def main() -> int:
                                 {
                                     "kind": "sample",
                                     "fork": fork,
-                                    "order_in_pair": order_index,
+                                    "order_in_group": order_index,
                                     "library": library,
                                     "operation": operation,
                                 }
@@ -469,7 +504,7 @@ def main() -> int:
                             {
                                 "kind": "sample",
                                 "fork": fork,
-                                "order_in_pair": order_index,
+                                "order_in_group": order_index,
                                 "library": library,
                                 "operation": operation,
                             }

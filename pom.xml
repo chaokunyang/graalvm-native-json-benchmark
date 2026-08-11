@@ -19,6 +19,7 @@
     <module>benchmark-core</module>
     <module>fory-app</module>
     <module>jackson-app</module>
+    <module>jackson-generated-app</module>
     <module>benchmark-tests</module>
   </modules>
 
@@ -26,7 +27,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
     <fory.version>1.6.0</fory.version>
-    <jackson.version>2.22.1</jackson.version>
+    <jackson.version>2.22.0</jackson.version>
+    <quarkus.platform.version>3.37.4</quarkus.platform.version>
     <junit.version>5.14.4</junit.version>
     <maven.compiler.version>3.15.0</maven.compiler.version>
     <maven.surefire.version>3.5.6</maven.surefire.version>
@@ -35,6 +37,13 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>io.quarkus.platform</groupId>
+        <artifactId>quarkus-bom</artifactId>
+        <version>${quarkus.platform.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
       <dependency>
         <groupId>org.apache.fory.benchmark</groupId>
         <artifactId>benchmark-core</artifactId>
@@ -48,6 +57,11 @@
       <dependency>
         <groupId>org.apache.fory.benchmark</groupId>
         <artifactId>jackson-app</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.fory.benchmark</groupId>
+        <artifactId>jackson-generated-app</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

@@ -13,18 +13,20 @@ public final class BenchmarkJsonMixins {
   private BenchmarkJsonMixins() {}
 
   @JsonMixin(target = Customer.class)
-  @JsonPropertyOrder(alphabetic = true)
+  @JsonPropertyOrder({
+    "address", "children", "creditCards", "income", "age", "firstName", "lastName"
+  })
   public abstract static class CustomerMixin {}
 
   @JsonMixin(target = Person.class)
-  @JsonPropertyOrder(alphabetic = true)
+  @JsonPropertyOrder({"age", "firstName", "lastName"})
   public abstract static class PersonMixin {}
 
   @JsonMixin(target = Address.class)
-  @JsonPropertyOrder(alphabetic = true)
+  @JsonPropertyOrder({"street", "town"})
   public abstract static class AddressMixin {}
 
   @JsonMixin(target = CreditCard.class)
-  @JsonPropertyOrder(alphabetic = true)
+  @JsonPropertyOrder({"limit", "name"})
   public abstract static class CreditCardMixin {}
 }
