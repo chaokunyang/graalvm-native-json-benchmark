@@ -1,0 +1,81 @@
+{
+  "benchmark": {
+    "batch_size": 64,
+    "cooldown_seconds": 0.5,
+    "execution_order": "balanced deterministic permutation cycle",
+    "fixture_count": 256,
+    "forks": 7,
+    "libraries": [
+      "fory-json",
+      "jackson",
+      "jackson-generated"
+    ],
+    "measure_seconds": 5,
+    "operations": [
+      "string-serialize",
+      "string-deserialize",
+      "utf8-serialize",
+      "utf8-deserialize"
+    ],
+    "time_tool_mode": "darwin",
+    "warmup_seconds": 3
+  },
+  "binaries": {
+    "fory-json": {
+      "path": "fory-app/target/fory-json-benchmark",
+      "sha256": "31a4da855cb5eaa2378df115abc0cf33d89afb20841a07a484ff0ef04d0571f9",
+      "size_bytes": 32209264
+    },
+    "jackson": {
+      "path": "jackson-app/target/jackson-benchmark",
+      "sha256": "189950265350774087f8665e7e1b23c65322f8149f41877f4d394ba2b7529083",
+      "size_bytes": 24342768
+    },
+    "jackson-generated": {
+      "path": "jackson-generated-app/target/jackson-generated-benchmark-runner",
+      "sha256": "b3462d50dcb76c35091f8f2715d2d12cc12edbcea5b57a983521e0bcc9df6224",
+      "size_bytes": 79695456
+    }
+  },
+  "dependencies": {
+    "fory_json": "1.6.0",
+    "jackson_databind": "2.22.0",
+    "native_maven_plugin": "1.1.8",
+    "quarkus": "3.37.4"
+  },
+  "native_build": {
+    "fallback": false,
+    "optimization": "-O3",
+    "reachability_metadata_repository": false
+  },
+  "repository": {
+    "commit": "97ac691f944a8aea22dc5ea70aa9058af339dc0f",
+    "dirty": false,
+    "status_porcelain": ""
+  },
+  "source_context": {
+    "quarkus_article": "https://quarkus.io/blog/quarkus-metaprogramming/",
+    "quarkus_rest_guide": "https://quarkus.io/guides/rest#reflection-free-jackson-serialization-and-deserialization",
+    "scope": "JSON codec layer; not HTTP endpoint throughput"
+  },
+  "started_at": "2026-08-11T18:48:44.980866+00:00",
+  "system": {
+    "cpu_model": "Apple M4 Pro",
+    "logical_cpu_count": 12,
+    "memory_bytes": 51539607552,
+    "os_version": "ProductName:\t\tmacOS\nProductVersion:\t\t15.7.2\nBuildVersion:\t\t24G325",
+    "platform": "macOS-15.7.2-arm64-arm-64bit",
+    "uname": {
+      "machine": "arm64",
+      "release": "24.6.0",
+      "system": "Darwin",
+      "version": "Darwin Kernel Version 24.6.0: Wed Oct 15 21:12:15 PDT 2025; root:xnu-11417.140.69.703.14~1/RELEASE_ARM64_T6041"
+    }
+  },
+  "toolchain": {
+    "java": "java version \"25.0.1\" 2025-10-21 LTS\nJava(TM) SE Runtime Environment Oracle GraalVM 25.0.1+8.1 (build 25.0.1+8-LTS-jvmci-b01)\nJava HotSpot(TM) 64-Bit Server VM Oracle GraalVM 25.0.1+8.1 (build 25.0.1+8-LTS-jvmci-b01, mixed mode, sharing)",
+    "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)\nMaven home: $REPO/tasks/task-generated-jackson-benchmark/toolchain/apache-maven-3.9.16\nJava version: 25.0.1, vendor: Oracle Corporation, runtime: /Library/Java/JavaVirtualMachines/graalvm-25.jdk/Contents/Home\nDefault locale: en_US, platform encoding: UTF-8\nOS name: \"mac os x\", version: \"15.7.2\", arch: \"aarch64\", family: \"mac\"",
+    "native_image": "native-image 25.0.1 2025-10-21\nGraalVM Runtime Environment Oracle GraalVM 25.0.1+8.1 (build 25.0.1+8-LTS-jvmci-b01)\nSubstrate VM Oracle GraalVM 25.0.1+8.1 (build 25.0.1+8-LTS, serial gc, compressed references)",
+    "python": "3.9.6 (default, Oct 17 2025, 17:15:53) \n[Clang 17.0.0 (clang-1700.4.4.1)]"
+  }
+}

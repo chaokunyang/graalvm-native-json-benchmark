@@ -42,7 +42,10 @@ fails unless both are Quarkus-generated implementations.
 
 ## Published results
 
-- [2026-08-12: Apple M4 Pro, Oracle GraalVM 25.0.1](results/2026-08-12-macos-arm64-graalvm25/report.md)
+- [2026-08-12 three-way comparison](results/2026-08-12-macos-arm64-graalvm25-three-way/report.md):
+  Fory JSON, build-time-generated Jackson, and ordinary Jackson
+- [2026-08-12 two-way comparison](results/2026-08-12-macos-arm64-graalvm25/report.md):
+  Fory JSON and ordinary Jackson
 
 ## Requirements
 
