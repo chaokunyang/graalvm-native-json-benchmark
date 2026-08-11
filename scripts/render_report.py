@@ -137,7 +137,7 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
     if not rows:
         raise ValueError("cannot write an empty summary")
     with path.open("w", encoding="utf-8", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -561,8 +561,8 @@ def report_markdown(
             f"## {relative_heading}",
             "",
             "The relative chart divides the two median throughputs for each operation. As a sensitivity "
-            "check, the analysis also pairs Fory and Jackson samples from the same fork; those paired "
-            "ratio ranges are shown below the chart rather than hidden behind the aggregate.",
+            "check, the table also pairs Fory and Jackson samples from the same fork and reports the full "
+            "range of paired ratios.",
             "",
             "![Fory JSON throughput relative to Jackson](relative-throughput.svg)",
             "",
@@ -604,10 +604,10 @@ def report_markdown(
             "GraalVM Native Image toolchain, `-O3`, and `--no-fallback`. Keeping separate images prevents "
             "one library or its metadata from becoming reachable in the other's executable.",
             "",
-            "Fory registers four mix-ins and exposes the exact configuration through a reachable "
-            "`@ForyJsonProvider`, so its Native Image Feature generates the object codecs during the image "
-            "build. The single-threaded Fory configuration uses field mode, a concurrency level of one, "
-            "and asynchronous compilation disabled. Jackson uses a field-only `ObjectMapper`, alphabetic property "
+            "Fory registers four mix-ins and exposes the benchmark configuration through a reachable "
+            "`@ForyJsonProvider`, allowing its Native Image Feature to generate object codecs at image build "
+            "time. The single-threaded configuration uses field mode with a concurrency level of one and "
+            "disables asynchronous compilation. Jackson uses a field-only `ObjectMapper`, alphabetic property "
             "ordering, and explicit reflection metadata for the same four model classes.",
             "",
             f"For every operation, the runner launched {process_phrase} and alternated "

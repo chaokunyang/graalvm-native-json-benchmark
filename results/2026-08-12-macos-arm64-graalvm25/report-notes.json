@@ -1,0 +1,41 @@
+{
+  "audience": "technical",
+  "chart_map": [
+    {
+      "artifact": "throughput.svg",
+      "family": "comparison and ranking",
+      "fields": [
+        "operation",
+        "library",
+        "median_ops_per_second",
+        "min_ops_per_second",
+        "max_ops_per_second"
+      ],
+      "palette": "hard two-root cap: orange and blue, with a hatch for Jackson",
+      "question": "How does median native throughput compare by operation and library?",
+      "section": "Native throughput across four JSON operations",
+      "type": "grouped horizontal bar with min-max whiskers"
+    },
+    {
+      "artifact": "relative-throughput.svg",
+      "family": "comparison and benchmark",
+      "fields": [
+        "operation",
+        "fory_to_jackson_median_throughput_ratio"
+      ],
+      "palette": "single orange root plus a neutral reference line",
+      "question": "What is Fory JSON throughput relative to Jackson for each operation?",
+      "section": "Fory JSON throughput relative to Jackson",
+      "type": "horizontal ratio bar with a 1.0x reference"
+    }
+  ],
+  "omitted_visuals": [
+    {
+      "reason": "Only two libraries are compared and exact lookup is more useful; report tables are clearer than additional charts.",
+      "topic": "native executable size and peak RSS"
+    }
+  ],
+  "primary_metric": "median operations per second across independent native processes",
+  "primary_surface": "repository-native Markdown",
+  "ratio_definition": "Fory median operations/s divided by Jackson median operations/s"
+}

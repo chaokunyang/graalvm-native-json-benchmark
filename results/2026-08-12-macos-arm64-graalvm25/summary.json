@@ -1,0 +1,154 @@
+{
+  "aggregates": [
+    {
+      "average_payload_bytes": 343.398,
+      "binary_size_bytes": 32143216,
+      "coefficient_of_variation_pct": 0.2972621443951355,
+      "library": "fory-json",
+      "max_ops_per_second": 3003620.522737,
+      "mean_ops_per_second": 2990799.867013,
+      "median_ns_per_operation": 334.571335,
+      "median_ops_per_second": 2988899.21204,
+      "median_peak_rss_bytes": 64356352.0,
+      "min_ops_per_second": 2978173.51799,
+      "operation": "string-serialize",
+      "samples": 7,
+      "stdev_ops_per_second": 8890.515819249704
+    },
+    {
+      "average_payload_bytes": 343.398,
+      "binary_size_bytes": 24309712,
+      "coefficient_of_variation_pct": 0.6348679399672337,
+      "library": "jackson",
+      "max_ops_per_second": 1485548.700724,
+      "mean_ops_per_second": 1474258.693084857,
+      "median_ns_per_operation": 677.678546,
+      "median_ops_per_second": 1475625.879062,
+      "median_peak_rss_bytes": 67158016.0,
+      "min_ops_per_second": 1461392.17402,
+      "operation": "string-serialize",
+      "samples": 7,
+      "stdev_ops_per_second": 9359.595794575693
+    },
+    {
+      "average_payload_bytes": 343.398,
+      "binary_size_bytes": 32143216,
+      "coefficient_of_variation_pct": 0.8812872614079401,
+      "library": "fory-json",
+      "max_ops_per_second": 1195409.032982,
+      "mean_ops_per_second": 1177339.2046034285,
+      "median_ns_per_operation": 849.43958,
+      "median_ops_per_second": 1177246.767438,
+      "median_peak_rss_bytes": 64454656.0,
+      "min_ops_per_second": 1167199.085397,
+      "operation": "string-deserialize",
+      "samples": 7,
+      "stdev_ops_per_second": 10375.74043373158
+    },
+    {
+      "average_payload_bytes": 343.398,
+      "binary_size_bytes": 24309712,
+      "coefficient_of_variation_pct": 0.9151995024428521,
+      "library": "jackson",
+      "max_ops_per_second": 808054.889181,
+      "mean_ops_per_second": 793297.6597997143,
+      "median_ns_per_operation": 1262.441308,
+      "median_ops_per_second": 792116.032394,
+      "median_peak_rss_bytes": 67371008.0,
+      "min_ops_per_second": 786082.613754,
+      "operation": "string-deserialize",
+      "samples": 7,
+      "stdev_ops_per_second": 7260.256235377776
+    },
+    {
+      "average_payload_bytes": 343.398,
+      "binary_size_bytes": 32143216,
+      "coefficient_of_variation_pct": 0.9091073304235255,
+      "library": "fory-json",
+      "max_ops_per_second": 4507293.009506,
+      "mean_ops_per_second": 4464047.464635,
+      "median_ns_per_operation": 224.196645,
+      "median_ops_per_second": 4460370.054838,
+      "median_peak_rss_bytes": 64258048.0,
+      "min_ops_per_second": 4389435.866907,
+      "operation": "utf8-serialize",
+      "samples": 7,
+      "stdev_ops_per_second": 40582.98273458232
+    },
+    {
+      "average_payload_bytes": 343.398,
+      "binary_size_bytes": 24309712,
+      "coefficient_of_variation_pct": 0.8126845692708227,
+      "library": "jackson",
+      "max_ops_per_second": 1531325.983856,
+      "mean_ops_per_second": 1510797.649462143,
+      "median_ns_per_operation": 662.009401,
+      "median_ops_per_second": 1510552.566057,
+      "median_peak_rss_bytes": 67108864.0,
+      "min_ops_per_second": 1495876.48532,
+      "operation": "utf8-serialize",
+      "samples": 7,
+      "stdev_ops_per_second": 12278.01937008513
+    },
+    {
+      "average_payload_bytes": 343.398,
+      "binary_size_bytes": 32143216,
+      "coefficient_of_variation_pct": 0.6571216726020821,
+      "library": "fory-json",
+      "max_ops_per_second": 1990329.749793,
+      "mean_ops_per_second": 1972650.1580287144,
+      "median_ns_per_operation": 506.836679,
+      "median_ops_per_second": 1973022.162632,
+      "median_peak_rss_bytes": 64389120.0,
+      "min_ops_per_second": 1958948.359559,
+      "operation": "utf8-deserialize",
+      "samples": 7,
+      "stdev_ops_per_second": 12962.711713025903
+    },
+    {
+      "average_payload_bytes": 343.398,
+      "binary_size_bytes": 24309712,
+      "coefficient_of_variation_pct": 0.5737741818543055,
+      "library": "jackson",
+      "max_ops_per_second": 947287.705425,
+      "mean_ops_per_second": 940549.9893844286,
+      "median_ns_per_operation": 1063.26302,
+      "median_ops_per_second": 940501.062082,
+      "median_peak_rss_bytes": 67354624.0,
+      "min_ops_per_second": 933424.99077,
+      "operation": "utf8-deserialize",
+      "samples": 7,
+      "stdev_ops_per_second": 5396.633006521262
+    }
+  ],
+  "comparisons": [
+    {
+      "fory_to_jackson_median_throughput_ratio": 2.025512871826246,
+      "max_paired_ratio": 2.043236125993607,
+      "median_paired_ratio": 2.0253954182483533,
+      "min_paired_ratio": 2.014418384587583,
+      "operation": "string-serialize"
+    },
+    {
+      "fory_to_jackson_median_throughput_ratio": 1.4862049488886437,
+      "max_paired_ratio": 1.4976120153783385,
+      "median_paired_ratio": 1.483300015958182,
+      "min_paired_ratio": 1.4720311973590212,
+      "operation": "string-deserialize"
+    },
+    {
+      "fory_to_jackson_median_throughput_ratio": 2.9528069099117267,
+      "max_paired_ratio": 3.0015144488465864,
+      "median_paired_ratio": 2.9694586818715676,
+      "min_paired_ratio": 2.890042140597599,
+      "operation": "utf8-serialize"
+    },
+    {
+      "fory_to_jackson_median_throughput_ratio": 2.097841504042849,
+      "max_paired_ratio": 2.116455642575825,
+      "median_paired_ratio": 2.0986671440444575,
+      "min_paired_ratio": 2.0809066438653754,
+      "operation": "utf8-deserialize"
+    }
+  ]
+}

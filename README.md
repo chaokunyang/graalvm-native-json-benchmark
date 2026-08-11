@@ -13,10 +13,11 @@ build-time Native Image codec generation, while Jackson uses conventional
 Databind with explicit reflection metadata. It does not claim to reproduce the
 article's HTTP benchmark or its experimental Jackson generator.
 
-The benchmark is single-threaded. Fory uses field mode, a concurrency level of
-one, asynchronous compilation disabled, four mix-ins, and a reachable
-`@ForyJsonProvider`. Jackson uses a field-only `ObjectMapper`, alphabetic
-property ordering, and reflection metadata for the same four model classes.
+The benchmark is single-threaded. Fory uses field mode with a concurrency level
+of one, disables asynchronous compilation, registers four mix-ins, and exposes
+its configuration through a reachable `@ForyJsonProvider`. Jackson uses a
+field-only `ObjectMapper`, alphabetic property ordering, and reflection metadata
+for the same four model classes.
 
 ## Compared operations
 
@@ -29,6 +30,10 @@ The harness rotates through 256 deterministic `Customer` graphs. JVM tests
 require both implementations to round-trip every graph and emit identical
 String and UTF-8 JSON. Before timing, the runner also requires both native
 executables to report the same hash over all 256 serialized payloads.
+
+## Published results
+
+- [2026-08-12: Apple M4 Pro, Oracle GraalVM 25.0.1](results/2026-08-12-macos-arm64-graalvm25/report.md)
 
 ## Requirements
 
