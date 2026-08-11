@@ -1,0 +1,22 @@
+[
+  {
+    "name": "org.apache.fory.benchmark.model.Person",
+    "allDeclaredConstructors": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "org.apache.fory.benchmark.model.Customer",
+    "allDeclaredConstructors": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "org.apache.fory.benchmark.model.Address",
+    "allDeclaredConstructors": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "org.apache.fory.benchmark.model.CreditCard",
+    "allDeclaredConstructors": true,
+    "allDeclaredFields": true
+  }
+]
